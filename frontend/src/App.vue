@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Table />
+    <div class="container">
+      <Table />
+    </div>
   </div>
 </template>
 
@@ -10,8 +12,8 @@ import Table from "./components/Table.vue";
 export default {
   name: "App",
   components: {
-    Table
-  }
+    Table,
+  },
 };
 </script>
 
