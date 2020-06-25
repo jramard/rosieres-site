@@ -1,7 +1,7 @@
 <template>
   <div class="table" v-loading="dataIsLoading">
     <div class="table__search">
-      <el-input v-model="search" size="mini" clearable placeholder="Type to search" />
+      <el-input v-model="search" clearable placeholder="Saisissez votre recherche" />
     </div>
     <el-table :data="chunkedData[pagination - 1] || chunkedData[0]" stripe style="width: 100%">
       <el-table-column prop="1" label="Nom" sortable></el-table-column>
