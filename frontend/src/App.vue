@@ -4,18 +4,21 @@
     <div class="container">
       <Table />
     </div>
+    <Footer />
   </div>
 </template>
 
 <script>
 import Slider from "./components/Slider.vue";
 import Table from "./components/Table.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   name: "App",
   components: {
     Slider,
     Table,
+    Footer,
   },
 };
 </script>
@@ -34,7 +37,6 @@ export default {
   }
 
   #app {
-    margin-bottom: 25px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: #2c3e50;
@@ -51,7 +53,7 @@ export default {
     color: #2c3e50;
     text-decoration: none;
     &:hover {
-      color: #3a8ee6;
+      color: #409eff;
     }
   }
 </style>
