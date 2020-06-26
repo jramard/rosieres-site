@@ -4,6 +4,7 @@ import locale from 'element-ui/lib/locale/lang/fr'
 import 'element-ui/lib/theme-chalk/index.css';
 import 'bootstrap/dist/css/bootstrap-grid.css';
 import 'swiper/css/swiper.min.css';
+import 'flag-icon-css/css/flag-icon.css';
 import App from './App.vue';
 
 Vue.config.productionTip = false;

@@ -7,10 +7,18 @@
       <el-table-column prop="1" label="Nom" sortable></el-table-column>
       <el-table-column prop="2" label="Prénom" sortable></el-table-column>
       <el-table-column prop="3" label="Genre" sortable></el-table-column>
-      <el-table-column prop="4" label="Pays" sortable></el-table-column>
+      <el-table-column prop="4" label="Pays" sortable>
+        <template slot-scope="scope">
+          <span :class="`flag-icon flag-icon-${getFlag(scope.row[4])}`"></span>
+        </template>
+      </el-table-column>
       <el-table-column prop="5" label="Age" sortable></el-table-column>
       <el-table-column prop="6" label="Date" sortable></el-table-column>
-      <el-table-column prop="7" label="Id" sortable></el-table-column>
+      <el-table-column prop="7" label="Id" sortable>
+        <template slot-scope="scope">
+          <a :href="`https://www.commune-rosieres10.fr/Recherche?id_article=${scope.row[7]}`">{{ scope.row[7] }}</a>
+        </template>
+      </el-table-column>
     </el-table>
     <div class="table__pagination">
       <el-pagination
@@ -59,6 +67,18 @@ export default {
     pageChange(val) {
       this.pagination = val;
     },
+    getFlag(country) {
+      switch (country) {
+        case 'France':
+          return 'fr';
+        case 'Great Britain':
+          return 'gb';
+        case 'United States':
+          return 'us';
+        default:
+          return 'sa';
+      }
+    },
   },
   mounted() {
     axios({
@@ -81,6 +101,7 @@ export default {
     }
     .table__pagination {
       margin-top: 25px;
+      text-align: center;
     }
   }
 </style>

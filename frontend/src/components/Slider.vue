@@ -81,6 +81,7 @@
             width: 350px;
             height: auto;
             z-index: 5;
+            user-select: none;
         }
     }
 </style>

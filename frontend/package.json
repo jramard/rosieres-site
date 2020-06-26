@@ -11,6 +11,7 @@
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "flag-icon-css": "^3.5.0",
     "lodash": "^4.17.15",
     "swiper": "^5.4.5",
     "vue": "^2.6.11"
