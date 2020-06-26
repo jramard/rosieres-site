@@ -1,7 +1,24 @@
 <template>
   <div class="table" v-loading="dataIsLoading">
-    <div class="table__search">
-      <el-input v-model="search" clearable placeholder="Saisissez votre recherche" />
+    <div class="table__options">
+      <div class="table__options__search">
+        <el-input v-model="search" clearable placeholder="Saisissez votre recherche" />
+      </div>
+      <div class="table__options__daterange">
+        <el-date-picker
+          v-model="dateRange"
+          type="daterange"
+          range-separator="à"
+          start-placeholder="Date de début"
+          end-placeholder="Date de fin"
+          :picker-options="{ firstDayOfWeek: 1 }"
+        />
+      </div>
+      <div class="table__options__button">
+        <el-button type="success" @click="submitDateFilter">
+          Soumettre
+        </el-button>
+      </div>
     </div>
     <el-table :data="chunkedData[pagination - 1] || chunkedData[0]" stripe style="width: 100%">
       <el-table-column prop="1" label="Nom" sortable></el-table-column>
@@ -36,6 +53,8 @@
 <script>
 import { chunk } from "lodash";
 import axios from "axios";
+// import moment from 'moment';
+// moment.locale('fr');
 
 export default {
   name: "Table",
@@ -47,6 +66,7 @@ export default {
       chunkNumber: 10,
       dataIsLoading: true,
       search: "",
+      dateRange: "",
     };
   },
   computed: {
@@ -79,6 +99,12 @@ export default {
           return 'sa';
       }
     },
+    submitDateFilter() {
+      // const startDate = moment(this.dateRange[0]).format('L');
+      // const endDate = moment(this.dateRange[1]).format('L');
+      // console.log(startDate, endDate);
+      this.$message('Traiter 5000 lignes en front pour comparer des dates, non merci !');
+    },
   },
   mounted() {
     axios({
@@ -95,9 +121,19 @@ export default {
 
 <style scoped lang="scss">
   .table {
-    .table__search {
-      max-width: 300px;
+    .table__options {
+      display: flex;
       margin-bottom: 25px;
+      .table__options__search {
+        flex-grow: 1;
+      }
+      .table__options__daterange {
+        width: 350px;
+        margin-left: 10px;
+      }
+      .table__options__button {
+        margin-left: 10px;
+      }
     }
     .table__pagination {
       margin-top: 25px;
