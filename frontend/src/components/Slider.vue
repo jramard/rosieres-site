@@ -34,6 +34,10 @@
                         name: 'Slide 3',
                         image: 'slide-3',
                     },
+                    {
+                        name: 'Slide 4',
+                        image: 'slide-4',
+                    },
                 ],
             };
         },
