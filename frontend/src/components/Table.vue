@@ -27,17 +27,21 @@
         prop="3"
         label="Genre"
         sortable
-        :filters="[{ text: 'Male', value: 'Male' }, { text: 'Female', value: 'Female' }]"
+        :filters="[{ text: 'Homme', value: 'Male' }, { text: 'Femme', value: 'Female' }]"
         :filter-method="filterGenre"
-      ></el-table-column>
+      >
+        <template slot-scope="scope">
+          <span>{{ getGender(scope.row[3]) }}</span>
+        </template>
+      </el-table-column>
       <el-table-column
         prop="4"
         label="Pays"
         sortable
         :filters="[
           { text: 'France', value: 'France' },
-          { text: 'Great Britain', value: 'Great Britain' },
-          { text: 'United States', value: 'United States' }
+          { text: 'Grande-Bretagne', value: 'Great Britain' },
+          { text: 'États-Unis', value: 'United States' }
         ]"
         :filter-method="filterCountry"
       >
@@ -105,7 +109,7 @@ export default {
           !this.search ||
           data[1].toLowerCase().includes(this.search.toLowerCase()) ||
           data[2].toLowerCase().includes(this.search.toLowerCase()) ||
-          data[7].includes(this.search)
+          data[7].toString().includes(this.search)
       );
     },
   },
@@ -123,6 +127,16 @@ export default {
           return 'us';
         default:
           return 'sa';
+      }
+    },
+    getGender(gender) {
+      switch (gender) {
+        case 'Male':
+          return 'Homme';
+        case 'Female':
+          return 'Femme';
+        default:
+          return 'Autre';
       }
     },
     submitDateFilter() {
