@@ -34,6 +34,10 @@
                         name: 'Slide 3',
                         image: 'slide-3',
                     },
+                    {
+                        name: 'Slide 4',
+                        image: 'slide-4',
+                    },
                 ],
             };
         },
@@ -81,6 +85,7 @@
             width: 350px;
             height: auto;
             z-index: 5;
+            user-select: none;
         }
     }
 </style>
