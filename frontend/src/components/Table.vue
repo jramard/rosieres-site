@@ -2,7 +2,7 @@
   <div class="table" v-loading="dataIsLoading">
     <div class="table__options">
       <div class="table__options__search">
-        <el-input v-model="search" clearable placeholder="Saisissez votre recherche" />
+        <el-input v-model="search" clearable placeholder="Filtrer par Nom, Prénom, ou Id" />
       </div>
       <div class="table__options__daterange">
         <el-date-picker
@@ -23,8 +23,24 @@
     <el-table :data="chunkedData[pagination - 1] || chunkedData[0]" stripe style="width: 100%">
       <el-table-column prop="1" label="Nom" sortable></el-table-column>
       <el-table-column prop="2" label="Prénom" sortable></el-table-column>
-      <el-table-column prop="3" label="Genre" sortable></el-table-column>
-      <el-table-column prop="4" label="Pays" sortable>
+      <el-table-column
+        prop="3"
+        label="Genre"
+        sortable
+        :filters="[{ text: 'Male', value: 'Male' }, { text: 'Female', value: 'Female' }]"
+        :filter-method="filterGenre"
+      ></el-table-column>
+      <el-table-column
+        prop="4"
+        label="Pays"
+        sortable
+        :filters="[
+          { text: 'France', value: 'France' },
+          { text: 'Great Britain', value: 'Great Britain' },
+          { text: 'United States', value: 'United States' }
+        ]"
+        :filter-method="filterCountry"
+      >
         <template slot-scope="scope">
           <span :class="`flag-icon flag-icon-${getFlag(scope.row[4])}`"></span>
         </template>
@@ -79,7 +95,7 @@ export default {
           !this.search ||
           data[1].toLowerCase().includes(this.search.toLowerCase()) ||
           data[2].toLowerCase().includes(this.search.toLowerCase()) ||
-          data[4].toLowerCase().includes(this.search.toLowerCase())
+          data[7].includes(this.search)
       );
     },
   },
@@ -104,6 +120,12 @@ export default {
       // const endDate = moment(this.dateRange[1]).format('L');
       // console.log(startDate, endDate);
       this.$message('Traiter 5000 lignes en front pour comparer des dates, non merci !');
+    },
+    filterGenre(value, row) {
+      return row[3] === value;
+    },
+    filterCountry(value, row) {
+      return row[4] === value;
     },
   },
   mounted() {
