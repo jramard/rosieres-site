@@ -45,7 +45,17 @@
           <span :class="`flag-icon flag-icon-${getFlag(scope.row[4])}`"></span>
         </template>
       </el-table-column>
-      <el-table-column prop="5" label="Age" sortable></el-table-column>
+      <el-table-column
+        prop="5"
+        label="Age"
+        sortable
+        :filters="[
+          { text: '<= 25', value: '1' },
+          { text: '> 25 et <= 50', value: '2' },
+          { text: '> 50', value: '3' }
+        ]"
+        :filter-method="filterAge"
+      ></el-table-column>
       <el-table-column prop="6" label="Date" sortable></el-table-column>
       <el-table-column prop="7" label="Id" sortable>
         <template slot-scope="scope">
@@ -126,6 +136,18 @@ export default {
     },
     filterCountry(value, row) {
       return row[4] === value;
+    },
+    filterAge(value, row) {
+      switch (value) {
+        case '1':
+          return row[5] <= 25;
+        case '2':
+          return row[5] > 25 && row[5] <= 50;
+        case '3':
+          return row[5] > 50;
+        default:
+          return row[5];
+      }
     },
   },
   mounted() {
